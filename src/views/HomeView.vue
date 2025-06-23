@@ -46,15 +46,14 @@
       ref="circle"
     />
   </nav>
-  <div id="app" class="text-gray-800 bg-black min-h-screen">
+  <div id="app" class="text-gray-800 bg-black">
     <header class="text-white h-[150rem]">
-      <div class="w-full fixed -top-12 text-[64px]" ref="title" :style="dynamicStyles">
+      <div class="w-full fixed text-[64px] h-screen top-0" ref="title" :style="dynamicStyles">
         <h3
-          class="md:text-2xl font-black metallic-copper text-center py-5 w-full fixed z-1"
+          class="font-black metallic-copper text-center py-5 w-full fixed text-[calc(max(64px,25vw)/4)] md:text-[calc(max(192px,20vw)/4)] lg:text-[calc(max(205px,15vw)/4)]"
           ref="title"
           :style="{
             ...dynamicStyles,
-            fontSize: '64px',
             top: `${Math.min(25, 100 / (scroll / 100) - 5)}%`,
             opacity: `${Math.min(1, 2 / (scroll / 100) - 0.1)}`,
           }"
@@ -65,30 +64,24 @@
         <img
           src="https://images.unsplash.com/photo-1611435263724-3f3c4e4cca27?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Breakdancer Dancing"
-          class="relative"
+          class="relative min-h-screen min-w-screen object-cover -z-1"
           :style="{ opacity: `${Math.min(0.3, 1 / (scroll / 100)) - 0.05}` }"
         />
       </div>
     </header>
 
-    <main class="rounded-lg shadow-xl overflow-hidden">
+    <main class="rounded-lg shadow-xl overflow-hidden z-20">
       <section
         id="about"
         data-item-id="about"
-        class="text-center rounded-lg mb-8 shadow-md grid grid-cols-2 grid-rows-2 border-t-6 border-gray-800"
+        class="text-center rounded-lg mb-8 shadow-md grid border-t-6 border-gray-800 lg:grid-cols-2 lg:grid-rows-2"
         :ref="(el) => elementRefs.set('about', el as HTMLElement)"
       >
-        <div class="border-r-3 border-b-3 border-gray-800">
-          <img
-            src="https://www.shutterstock.com/image-photo/athletic-young-bboy-standing-on-600nw-1389031484.jpg"
-            alt="Breakdancer spinning"
-            class="w-full relative"
-            :ref="(el) => imagesVisible.set('img1', el as HTMLElement)"
-          />
-        </div>
-        <div class="border-l-3 border-b-3 border-gray-800">
-          <h2 class="text-4xl font-bold text-white mb-4 pt-5">Welcome to Rise Studios</h2>
-          <p class="text-2xl text-gray-400 px-10 mx-auto">
+        <div class="border-b-3 border-gray-800 lg:col-start-2 lg:border-l-3 pb-6">
+          <h2 class="font-bold text-white pt-5 text-3xl mb-2 xl:mb-4 xl:text-4xl">
+            Welcome to Rise Studios
+          </h2>
+          <p class="text-gray-400 px-7 sm:px-10 mx-auto h-fit text-sm sm:text-lg xl:text-xl">
             Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae
             pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu
             aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum
@@ -102,9 +95,18 @@
             inceptos himenaeos.
           </p>
         </div>
-        <div class="border-r-3 border-t-3 border-gray-800">
-          <h2 class="text-4xl font-bold pt-5 text-white mb-4">About Me</h2>
-          <p class="text-2xl text-gray-400 px-10 mx-auto">
+        <div class="border-b-3 border-gray-800 h-full row-start-2 lg:row-start-1 lg:border-r-3">
+          <img
+            src="https://www.shutterstock.com/image-photo/athletic-young-bboy-standing-on-600nw-1389031484.jpg"
+            alt="Breakdancer spinning"
+            class="relative object-cover w-full h-full"
+            :ref="(el) => imagesVisible.set('img1', el as HTMLElement)"
+          />
+        </div>
+
+        <div class="border-t-3 border-gray-800 lg:border-r-3 pb-6">
+          <h2 class="text-4xl font-bold pt-5 text-white mb-4 lg:mb-2 lg:text-3xl">About Me</h2>
+          <p class="text-gray-400 px-7 sm:px-10 mx-auto h-fit text-sm sm:text-lg xl:text-xl">
             Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae
             pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu
             aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum
@@ -121,7 +123,7 @@
         <div class="border-l-3 border-t-3 border-gray-800">
           <img
             src="https://thumbs.dreamstime.com/b/composite-image-muscular-fit-man-arms-crossed-against-room-overlooking-ocean-66193716.jpg"
-            class="w-full relative"
+            class="relative object-cover w-full h-full"
             alt="Dancer"
             :ref="(el) => imagesVisible.set('img2', el as HTMLElement)"
           />
@@ -294,10 +296,7 @@ window.addEventListener('resize', () => moveDot(visibleElements))
 
 watch(visibleElements, moveDot, { immediate: true, deep: true })
 
-let oldAbout = false
 watch(visibleElements, (newValue) => {
-  if (newValue.get('about') === oldAbout) return
-  oldAbout = newValue.get('about') as boolean
   imagesVisible.value.forEach((el, key) => {
     if (newValue.get('about')) {
       el.style.setProperty('transition', 'all 2000ms ease-in-out')
@@ -374,5 +373,34 @@ onUnmounted(() => {
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
   transition: background-position 0.1s ease;
+  animation: copper-shine 4s ease-in-out infinite;
+}
+
+@keyframes copper-shine {
+  0% {
+    background-position:
+      0 0,
+      -50% 0;
+  }
+  25% {
+    background-position:
+      0 0,
+      0% 0;
+  }
+  50% {
+    background-position:
+      0 0,
+      50% 0;
+  }
+  75% {
+    background-position:
+      0 0,
+      0% 0;
+  }
+  100% {
+    background-position:
+      0 0,
+      -50% 0;
+  }
 }
 </style>
