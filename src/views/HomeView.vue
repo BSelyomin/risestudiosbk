@@ -47,8 +47,8 @@
     />
   </nav>
   <div id="app" class="text-gray-800 bg-black">
-    <header class="text-white h-[150rem]">
-      <div class="w-full fixed text-[64px] h-screen top-0" ref="title" :style="dynamicStyles">
+    <header class="text-white h-[120rem] lg:h-[150rem]">
+      <div class="w-full fixed text-[64px] top-0" ref="title" :style="dynamicStyles">
         <h3
           class="font-black metallic-copper text-center py-5 w-full fixed text-[calc(max(64px,25vw)/4)] md:text-[calc(max(192px,20vw)/4)] lg:text-[calc(max(205px,15vw)/4)]"
           ref="title"
@@ -60,6 +60,7 @@
         >
           <p class="text-[5.333em] leading-[0.9]" style="letter-spacing: normal">RISE</p>
           <p>‎ STUDIOS</p>
+          <p class="text-4xl md:text-5xl lg:text-6xl pt-[5rem] lg:pt-[5%] font-extrabold">‎ ˇ</p>
         </h3>
         <img
           src="https://images.unsplash.com/photo-1611435263724-3f3c4e4cca27?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
