@@ -1,7 +1,7 @@
 <template>
   <div class="m-auto text-white text-6xl">Upcoming Events</div>
 
-  <div class="">
+  <div>
     <span v-if="!loaded" class="loading loading-spinner loading-xl text-white" />
     <div v-else class="w-full">
       <div v-for="(event, i) in events" :key="event.id" class="w-full">
@@ -13,7 +13,7 @@
             <div class="flex flex-col items-center">
               <img
                 :src="supabase.storage.from('images').getPublicUrl(event.image_name).data.publicUrl"
-                class="max-w-lg rounded-lg shadow-2xl"
+                class="rounded-lg shadow-2xl"
                 @click="imageRefs.get('image' + i)?.showModal()"
               />
               />
