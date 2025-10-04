@@ -1,1 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap');
 @import 'tailwindcss';
+@plugin "daisyui";
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.custom_scrollbar {
+  scrollbar-width: auto;
+  scrollbar-color: #8c8c8c rgba(0, 0, 0, 0);
+}
+
+.custom_scrollbar::-webkit-scrollbar {
+  width: 16px;
+}
+
+.custom_scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+.custom_scrollbar::-webkit-scrollbar-thumb {
+  background-color: #8c8c8c;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}
