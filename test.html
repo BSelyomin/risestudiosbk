@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Diff Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --color-base-100: #183a80; /* Light Gray */
+        --color-base-content: #1f2937; /* Dark Gray */
+        --tw-outline-style: solid;
+      }
+
+      .diff {
+        position: relative;
+        display: grid;
+        width: 100%;
+        height: 100%; /* Important for visualization */
+        overflow: hidden;
+        -webkit-user-select: none;
+        user-select: none;
+        direction: ltr;
+        container-type: inline-size; /* Enables cqi units */
+        grid-template-columns: 50% 1fr; /* Initial split: 50% for column 1, rest for column 2 */
+      }
+      .diff:focus-visible,
+      .diff:has(.diff-item-1:focus-visible) {
+        outline-style: var(--tw-outline-style);
+        outline-width: 2px;
+        outline-offset: 1px;
+        outline-color: var(--color-base-content);
+      }
+      .diff:focus-visible .diff-resizer,
+      .diff:has(.diff-item-1:focus-visible) .diff-resizer {
+        min-width: 90cqi; /* Example of focus-driven split */
+        max-width: 90cqi;
+      }
+      /* Focus states (primarily for accessibility testing) */
+
+      .diff-resizer {
+        position: relative; /* Changed from relative/grid placement for easier absolute positioning on touch/drag */
+        top: 50%;
+        z-index: 1;
+        grid-column-start: 1;
+        grid-row-start: 1;
+        height: 0.5rem;
+        width: 50cqi;
+        max-width: 'calc(100cqi-1rem)';
+        min-width: '1rem';
+        resize: horizontal;
+        overflow: hidden;
+        opacity: 0%; /* Invisible but still interactive */
+
+        transform: scaleY(3) translate(0.35rem, 0.08rem);
+        cursor: ew-resize;
+        transform-origin: 100% 100%;
+        clip-path: inset(calc(100% - 0.75rem) 0 0 calc(100% - 0.75rem));
+        transition:
+          min-width 0.3s ease-out,
+          max-width 0.3s ease-out;
+      }
+
+      .diff-item-2 {
+        position: relative;
+        grid-column-start: 1;
+        grid-row-start: 1;
+      }
+
+      .diff-item-2::after {
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        right: 1px;
+        bottom: 0;
+        z-index: 2;
+        border-radius: calc(infinity * 1px);
+        background-color: color-mix(in oklab, var(--color-base-100) 50%, transparent);
+        width: 1.2rem;
+        height: 1.8rem;
+        border: 2px solid var(--color-base-100);
+        content: '';
+        outline: 1px solid color-mix(in oklab, var(--color-base-content) 5%, #0000);
+        outline-offset: -3px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 1px 2px 0;
+        translate: 50% -50%;
+      }
+      .diff-item-2 > * {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100cqi;
+        max-width: none;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .diff-item-1 {
+        position: relative;
+        z-index: 1;
+        grid-column-start: 1;
+        grid-row-start: 1;
+        overflow: hidden;
+        border-right: 2px solid var(--color-base-100); /* White border for clear separation */
+      }
+
+      .diff-item-1 > * {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        /* Note: width must span the entire container width, not just its column */
+        width: 100cqi;
+        max-width: none;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+      @supports (-webkit-overflow-scrolling: touch) and (overflow: -webkit-paged-x) {
+        .diff:focus .diff-resizer {
+          min-width: 10cqi; /* Example of focus-driven split */
+          max-width: 10cqi;
+        }
+        .diff:has(.diff-item-1:focus) .diff-resizer {
+          min-width: 90cqi; /* Example of focus-driven split */
+          max-width: 90cqi;
+        }
+        .diff-item-2::after {
+          content: none;
+        }
+      } /* .diff-resizer - The invisible, grabbable element */
+      /* Current Index */
+
+      /* .diff-item-2 - The 'after' view, fills the remaining space */
+
+      /* The image inside item 2 must be positioned correctly */
+    </style>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 font-sans">
+    <div class="diff-wrapper w-full max-w-4xl h-96 relative">
+      <div class="diff" id="diffContainer" tabindex="0">
+        <!-- Item 1 (Before) - The visible part is clipped by its column width -->
+        <div class="diff-item-1" id="item1">
+          <img
+            src="https://placehold.co/1200x800/2563eb/ffffff?text=BEFORE+(Original)"
+            alt="Original Image"
+            class="w-full h-full"
+          />
+        </div>
+
+        <!-- Item 2 (After) - Fills the entire grid area -->
+        <div class="diff-item-2" id="item2">
+          <img
+            src="https://placehold.co/1200x800/dc2626/ffffff?text=AFTER+(Modified)"
+            alt="Modified Image"
+            class="w-full h-full"
+          />
+        </div>
+
+        <!-- Resizer Element (Invisible target for dragging) -->
+        <div class="diff-resizer" id="resizer">
+        </div>
+      <p class="mt-4 text-center text-sm text-gray-600">
+        Drag the slider left or right to compare the images.
+      </p>
+    </div>
+
+    <script>
+      const container = document.getElementById('diffContainer')
+      const resizer = document.getElementById('resizer')
+      const item1 = document.getElementById('item1')
+      let isDragging = false
+
+      // --- Utility Functions for Touch/Mouse Handling ---
+
+      // Get the client X position regardless of touch or mouse event
+      const getClientX = (event) => {
+        if (event.touches) {
+          return event.touches[0] ? event.touches[0].clientX : event.changedTouches[0].clientX
+        }
+        return event.clientX
+      }
+
+      // --- Drag Logic ---
+
+      const startDrag = (event) => {
+        event.preventDefault()
+        isDragging = true
+        container.style.cursor = 'ew-resize'
+        resizer.style.opacity = '0.3' // Visual feedback on drag start
+        document.addEventListener('mousemove', onDrag)
+        document.addEventListener('mouseup', stopDrag)
+        document.addEventListener('touchmove', onDrag)
+        document.addEventListener('touchend', stopDrag)
+      }
+
+      const onDrag = (event) => {
+        if (!isDragging) return
+
+        const clientX = getClientX(event)
+        const containerRect = container.getBoundingClientRect()
+
+        let newX = clientX - containerRect.left
+
+        // Clamp newX to prevent resizer from leaving the container
+        newX = Math.max(0, Math.min(newX, containerRect.width))
+
+        // Calculate the new percentage split
+        const percentage = (newX / containerRect.width) * 100
+
+        // Update the grid-template-columns and resizer position
+        container.style.gridTemplateColumns = `${percentage}% 1fr`
+        resizer.style.left = `${percentage}%`
+
+        // Prevent text selection during drag
+        document.body.style.userSelect = 'none'
+      }
+
+      const stopDrag = () => {
+        isDragging = false
+        container.style.cursor = 'default'
+        resizer.style.opacity = '0.1' // Reset visual feedback
+        document.body.style.userSelect = 'auto'
+        document.removeEventListener('mousemove', onDrag)
+        document.removeEventListener('mouseup', stopDrag)
+        document.removeEventListener('touchmove', onDrag)
+        document.removeEventListener('touchend', stopDrag)
+      }
+
+      // --- Event Listeners ---
+
+      // Mouse events
+      resizer.addEventListener('mousedown', startDrag)
+
+      // Touch events for mobile
+      resizer.addEventListener('touchstart', (e) => {
+        e.preventDefault() // Prevent default mobile scrolling/gestures
+        startDrag(e)
+      })
+    </script>
+  </body>
+</html>
