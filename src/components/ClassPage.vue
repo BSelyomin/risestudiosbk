@@ -3,71 +3,45 @@
     <div
       v-for="item in classes"
       :key="item.id"
-      class="relative group overflow-hidden transition-all ease-in-out sm:h-150 lg:h-200"
-      @click="setAnimation(true, item.id)"
-      :class="{
-        'cursor-pointer': !classDesc[item.id],
-        'h-300 sm:w-screen': classDesc[item.id],
-        'h-0 sm:w-0': !classDesc[item.id] && classDescVisible,
-        'h-75 sm:w-full': !classDesc[item.id] && !classDescVisible,
-      }"
-      :style="{ transitionDuration: classDescVisible ? '1000ms' : '2000ms' }"
+      class="relative group overflow-hidden h-75 sm:w-full sm:h-150 lg:h-200 cursor-pointer"
+      @click="classDesc[item.id] = !classDesc[item.id]"
     >
       <img
         :src="item.image"
-        class="h-full w-full object-cover sm:grayscale-0 transition-all duration-1000 ease-in-out"
-        :class="{
-          'grayscale-75 sm:group-hover:grayscale-75 sm:group-hover:scale-110': !classDesc[item.id],
-          'grayscale-0': classDesc[item.id],
-        }"
+        class="h-full w-full object-cover transition-all duration-1000 ease-in-out grayscale-75 sm:grayscale-0 sm:group-hover:grayscale-75 sm:group-hover:scale-110"
         :alt="`${item.name} Class`"
       />
       <div
-        class="relative h-fit transition-all sm:top-0 duration-500 text-white font-semibold ease-in-out underline sm:no-underline underline-offset-2"
-        :class="{
-          '-top-[calc(20%+1rem)] sm:group-hover:-translate-y-[calc(100%+1rem)]':
-            !classDesc[item.id],
-        }"
+        class="relative h-fit transition-all sm:top-0 duration-500 text-white font-semibold ease-in-out underline sm:no-underline underline-offset-2 -top-[calc(20%+1rem)] sm:group-hover:-translate-y-[calc(100%+1rem)]"
       >
         <h1 class="text-2xl text-shadow-md text-shadow-black">{{ item.name }}</h1>
         <p class="text-gray-300 mb-4 text-shadow-md text-shadow-black">More Info &#8595;</p>
       </div>
       <div
-        class="relative h-full w-full transition-all duration-1000"
-        :class="{ '-top-full': classDesc[item.id], 'top-0': !classDesc[item.id] }"
+        class="absolute left-0 w-full transition-all duration-1000 ease-in-out -bottom-full bg-black rounded-t-[3rem] px-7 sm:px-10 py-8"
+        :class="{ 'bottom-0': classDesc[item.id] }"
       >
-        <div class="bg-black h-2/3 rounded-[3rem] transition-all duration-1000 ease-in-out top-1/6">
-          <div
-            class="relative top-0 left-0 w-full h-full pt-5 pb-10 transition-all duration-1000 ease-in"
-          >
-            <h1
-              class="text-4xl sm:text-2xl md:text-4xl xl:text-6xl font-bold mb-4 flex justify-center m-auto"
-              :style="{ color: classAnimation ? 'white' : 'transparent' }"
-            >
-              &#8204; {{ item.name }}
-            </h1>
+        <div class="relative w-full">
+          <h1 class="text-2xl md:text-3xl font-bold mb-4 text-center text-white">
+            {{ item.name }}
+          </h1>
 
-            <p
-              v-show="classAnimation"
-              class="h-[90%] text-gray-400 whitespace-pre-line overflow-x-auto px-7 sm:px-10 mx-auto text-md sm:text-sm lg:text-lg xl:text-xl"
-            >
-              {{ item.desc }}
-            </p>
-            <button
-              class="absolute right-8 top-4 text-3xl font-bold text-white cursor-pointer"
-              :style="{ opacity: classAnimation ? '1' : '0' }"
-              @click.stop="setAnimation(false, item.id)"
-            >
-              &#x2715;
-            </button>
-          </div>
+          <p class="text-gray-400 whitespace-pre-line text-md sm:text-sm lg:text-base xl:text-lg">
+            {{ item.desc }}
+          </p>
+          <button
+            class="absolute right-0 top-0 text-2xl font-bold text-white cursor-pointer"
+            @click.stop="classDesc[item.id] = !classDesc[item.id]"
+          >
+            &#x2715;
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed, reactive } from 'vue'
+import { reactive } from 'vue'
 
 const classDesc = reactive({
   babyBreaks: false,
@@ -75,16 +49,6 @@ const classDesc = reactive({
   yoga: false,
   fitness: false,
 })
-const classAnimation = ref(false)
-
-let timeout: NodeJS.Timeout | null = null
-function setAnimation(desc: boolean, id: keyof typeof classDesc) {
-  if (classDesc[id] === desc) return
-  classDesc[id] = desc
-  if (timeout) clearTimeout(timeout)
-  if (desc) timeout = setTimeout(() => (classAnimation.value = true), 1000)
-  else classAnimation.value = false
-}
 
 interface classesType {
   id: keyof typeof classDesc
@@ -116,11 +80,7 @@ const classes: classesType[] = [
     id: 'fitness',
     name: 'Fitness',
     image: 'headstand.jpg',
-    desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
+    desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. ',
   },
 ]
-
-const classDescVisible = computed(
-  () => classDesc.babyBreaks || classDesc.breakdanceYouth || classDesc.yoga || classDesc.fitness,
-)
 </script>

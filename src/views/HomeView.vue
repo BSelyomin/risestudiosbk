@@ -26,7 +26,7 @@
 
       <section
         id="contact"
-        class="relative py-12 text-center h-150 sm:h-200 mb-100"
+        class="relative py-12 text-center h-150 sm:h-200"
         :ref="(el) => elementRefs.set('contact', el as HTMLElement)"
       >
         <SocialsPage />
