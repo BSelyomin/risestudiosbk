@@ -27,39 +27,41 @@
       </div>
     </div>
   </div>
-  <div class="mb-[calc(100vh+20rem)] h-10" ref="aboutUs" id="aboutUs">
-    <div
-      class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
-    >
+  <div>
+    <div class="mb-[calc(55vh+20rem)] h-10" ref="aboutUs" id="aboutUs">
       <div
-        class="hero h-screen bg-[url('/classpic-vert.jpg')] landscape:bg-[url('/classpic.jpeg')] grayscale-75"
+        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
       >
-        <div class="hero-overlay"></div>
-        <div class="hero-content text-neutral-content text-center w-full h-full px-0">
-          <div class="w-full md:w-3/4 text-center h-3/4 flex flex-col mt-15">
-            <h2 class="font-bold text-white text-3xl mb-2 xl:mb-4 xl:text-5xl text-center">
-              About Us
-            </h2>
-            <p class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl pb-5">
-              <b>Rise Studios</b> is a creative hub dedicated to movement, expression, and
-              community. Specializing in <b>breakdance instruction</b>, we offer classes designed
-              for dancers of all levels from beginners building a strong foundation to advanced
-              students refining their craft. Our mission is to inspire confidence, discipline, and
-              creativity through the art of dance.
-            </p>
-            <p
-              class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl pb-5 mt-auto mb-0"
-            >
-              In addition to our own programming, Rise Studios provides <b>studio rentals</b> for
-              outside instructors, organizations, and community groups looking for a welcoming space
-              to host classes, workshops, or events. With an open layout and supportive environment,
-              our studio serves as both a training ground for dancers and a versatile venue for a
-              variety of programs.
-            </p>
-            <p class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl mb-0">
-              At Rise Studios, we believe in growth, collaboration, and empowering individuals to
-              rise to their fullest potential on and off the dance floor.
-            </p>
+        <div
+          class="hero h-screen bg-[url('/classpic-vert.jpg')] landscape:bg-[url('/classpic.jpeg')] grayscale-75"
+        >
+          <div class="hero-overlay"></div>
+          <div class="hero-content text-neutral-content text-center w-full h-full px-0">
+            <div class="w-full md:w-3/4 text-center h-3/4 flex flex-col mt-15">
+              <h2 class="font-bold text-white text-3xl mb-2 xl:mb-4 xl:text-5xl text-center">
+                About Us
+              </h2>
+              <p class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl pb-5">
+                <b>Rise Studios</b> is a creative hub dedicated to movement, expression, and
+                community. Specializing in <b>breakdance instruction</b>, we offer classes designed
+                for dancers of all levels from beginners building a strong foundation to advanced
+                students refining their craft. Our mission is to inspire confidence, discipline, and
+                creativity through the art of dance.
+              </p>
+              <p
+                class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl pb-5 mt-auto mb-0"
+              >
+                In addition to our own programming, Rise Studios provides <b>studio rentals</b> for
+                outside instructors, organizations, and community groups looking for a welcoming
+                space to host classes, workshops, or events. With an open layout and supportive
+                environment, our studio serves as both a training ground for dancers and a versatile
+                venue for a variety of programs.
+              </p>
+              <p class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl mb-0">
+                At Rise Studios, we believe in growth, collaboration, and empowering individuals to
+                rise to their fullest potential on and off the dance floor.
+              </p>
+            </div>
           </div>
         </div>
       </div>

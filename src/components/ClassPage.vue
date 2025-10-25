@@ -8,7 +8,7 @@
     >
       <img
         :src="item.image"
-        class="h-full w-full object-cover transition-all duration-1000 ease-in-out grayscale-75 sm:grayscale-0 sm:group-hover:grayscale-75 sm:group-hover:scale-110"
+        class="h-full w-full object-cover transition-all duration-1000 ease-in-out sm:group-hover:grayscale-75 sm:group-hover:scale-110"
         :alt="`${item.name} Class`"
       />
       <div

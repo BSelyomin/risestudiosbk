@@ -18,7 +18,7 @@
 
       <section
         id="events"
-        class="py-12 text-center border-b border-dashed border-pink-200 mb-8"
+        class="my-12 text-center border-b border-dashed border-pink-200 mb-8"
         :ref="(el) => elementRefs.set('events', el as HTMLElement)"
       >
         <EventsPage />
@@ -57,7 +57,7 @@ onMounted(async () => {
 
   navObserver = new IntersectionObserver(
     (n) => n.forEach((e) => visibleElements.set(e.target.id, e.isIntersecting)),
-    { root: null, rootMargin: '0px', threshold: 0.1 },
+    { root: null, rootMargin: '0px', threshold: 0.05 },
   )
   elementRefs.value.forEach((element, key) => {
     navObserver?.observe(element)
