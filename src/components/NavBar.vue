@@ -1,7 +1,7 @@
 <template>
-  <nav class="fixed w-full z-100">
+  <nav class="fixed w-screen z-100">
     <ul
-      class="flex h-12 justify-around items-center text-[16px] xl:text-2xl xl:h-16 text-white font-semibold"
+      class="flex h-12 justify-around items-center text-[16px] 3xl:text-2xl 3xl:h-16 text-white font-semibold"
       ref="nav"
     >
       <li>
@@ -42,7 +42,7 @@
       </li>
     </ul>
     <div
-      class="bg-white h-2 w-2 xl:h-4 xl:w-4 rounded-full duration-1000 ease-in-out relative shadow-md shadow-black"
+      class="bg-white h-2 w-2 3xl:h-4 3xl:w-4 rounded-full duration-1000 ease-in-out relative shadow-md shadow-black"
       ref="circle"
     />
   </nav>

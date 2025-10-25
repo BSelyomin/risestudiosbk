@@ -1,19 +1,19 @@
 <template>
   <header
-    class="relative text-white h-[120rem] lg:h-[150rem] xl:h-[200rem]"
+    class="relative text-white h-[120rem] lg:h-[150rem] xl:h-[130rem]"
     :class="{ 'scale-0': scroll > 1800 }"
   >
-    <div class="w-full fixed text-[64px] top-0" ref="title" :style="dynamicStyles">
+    <div class="fixed text-[64px] top-0" ref="title" :style="styles">
       <h3
-        class="font-black metallic-copper text-center py-5 w-full fixed text-[calc(max(64px,25vw)/4)] md:text-[calc(max(192px,20vw)/4)] lg:text-[calc(max(205px,15vw)/4)]"
+        class="w-screen font-black metallic-copper text-center py-5 fixed text-[calc(max(64px,25vw)/4)] md:text-[calc(max(192px,20vw)/4)] lg:text-[calc(max(205px,15vw)/4)]"
         ref="title"
         :style="{
-          ...dynamicStyles,
-          top: `${Math.min(25, 100 / (scroll / 100) - 5)}%`,
-          opacity: `${Math.min(1, 2 / (scroll / 100) - 0.1)}`,
+          ...styles,
+          top: 20 - scroll / 15 + '%',
+          opacity: 200 / scroll - 0.1,
         }"
       >
-        <p class="text-[5.333em] leading-[0.9]" style="letter-spacing: normal">RISE</p>
+        <p class="text-[5.333em] leading-[0.9] tracking-normal">RISE</p>
         <p>&#8204; STUDIOS</p>
         <p class="text-4xl md:text-5xl lg:text-6xl pt-[5rem] lg:pt-[5%] font-extrabold">
           &#8204; &#9013;
@@ -22,8 +22,8 @@
       <img
         src="https://images.unsplash.com/photo-1611435263724-3f3c4e4cca27?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Breakdancer Dancing"
-        class="relative min-h-screen min-w-screen object-cover -z-2"
-        :style="{ opacity: `${Math.min(0.3, 1 / (scroll / 100)) - 0.05}` }"
+        class="relative h-screen w-screen object-cover -z-2 opacity-30"
+        :style="{ opacity: Math.min(0.3, 1 / (scroll / 100)) - 0.05 }"
       />
     </div>
   </header>
@@ -36,13 +36,13 @@ defineProps<{ scroll: number }>()
 
 const title = useTemplateRef('title')
 const titleBounds = ref<DOMRect | null>(null)
-const dynamicStyles = ref<Record<string, string>>({
+const styles = ref<Record<string, string>>({
   '--mouse-x': '50%',
   '--mouse-y': '50%',
 })
 
 document.addEventListener('mousemove', (e) => {
-  dynamicStyles.value = {
+  styles.value = {
     '--mouse-x': `${Math.max(0, Math.min(100, (e.clientX / window.innerWidth) * 100))}%`,
     '--mouse-y': `${Math.max(0, Math.min(100, (e.clientY / window.innerHeight) * 100))}%`,
   }

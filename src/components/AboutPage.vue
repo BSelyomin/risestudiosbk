@@ -1,118 +1,68 @@
 <template>
-  <div class="mb-[100vh] h-1" ref="aboutMe" id="aboutMe">
+  <div class="mb-[100vh] h-10" ref="aboutMe" id="aboutMe">
     <div
       class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
     >
-      <figure class="diff aspect-9/16 md:aspect-16/9 w-2/3 m-auto" tabindex="0">
-        <div class="diff-item-1" role="img" tabindex="0">
-          <div>
-            <picture class="relative object-cover w-full h-full">
-              <source media="(max-width: 767px)" srcset="/bboyrise.jpeg" />
-
-              <source media="(min-width: 768px)" srcset="/bboyrise-comp.jpg" />
-
-              <img
-                src="/bboyrise-comp.jpg"
-                alt="Bboy Rise Sitting In A Chair"
-                class="w-full h-full"
-              />
-            </picture>
+      <div
+        class="hero h-screen bg-[url('/bboyrise.jpeg')] landscape:bg-[url('/bboyrise-comp.jpg')]"
+      >
+        <div class="hero-overlay"></div>
+        <div class="hero-content text-neutral-content text-center w-full">
+          <div
+            class="w-full md:w-3/4 text-center bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,1)_0%,transparent_75%)]"
+          >
+            <h2 class="font-bold text-white text-3xl mb-2 xl:mb-4 xl:text-5xl text-center">
+              About Me
+            </h2>
+            <p class="text-gray-300 sm:px-10 h-fit text-sm sm:text-lg md:text-2xl">
+              My name is <b>Anthony Tagliavia</b>, also known as <b>Bboy Rise</b>. I am a breakdance
+              instructor, founder of the <b>Illstylez Crew</b>, and owner of <b>Rise Studios</b>.
+              Dance has been my passion and purpose, giving me not only a creative outlet but also a
+              way to build community and inspire others. Through my work, I aim to share the art of
+              breakdancing, empower students of all levels, and create a space where movement,
+              expression, and growth come together.
+            </p>
           </div>
         </div>
-        <div class="diff-item-2" role="img">
-          <div>
-            <picture class="object-cover w-full h-full blur-sm brightness-50 absolute">
-              <source media="(max-width: 767px)" srcset="/bboyrise.jpeg" />
-
-              <source media="(min-width: 768px)" srcset="/bboyrise-comp.jpg" />
-
-              <img
-                src="/bboyrise-comp.jpg"
-                alt="Bboy Rise Sitting In A Chair"
-                class="w-full h-full"
-              />
-            </picture>
-
-            <div class="absolute text-center">
-              <h2 class="font-bold text-white pt-5 text-3xl mb-2 xl:mb-4 xl:text-4xl text-center">
-                About Me
-              </h2>
-              <p class="text-gray-300 px-7 sm:px-10 h-fit text-sm sm:text-lg md:text-2xl">
-                My name is <b>Anthony Tagliavia</b>, also known as <b>Bboy Rise</b>. I am a
-                breakdance instructor, founder of the <b>Illstylez Crew</b>, and owner of
-                <b>Rise Studios</b>. Dance has been my passion and purpose, giving me not only a
-                creative outlet but also a way to build community and inspire others. Through my
-                work, I aim to share the art of breakdancing, empower students of all levels, and
-                create a space where movement, expression, and growth come together.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="diff-resizer"></div>
-      </figure>
+      </div>
     </div>
   </div>
-  <div class="mb-[100vh] h-1" ref="aboutUs" id="aboutUs">
+  <div class="mb-[calc(100vh+20rem)] h-10" ref="aboutUs" id="aboutUs">
     <div
       class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
     >
-      <figure class="diff aspect-9/16 md:aspect-16/9 w-2/3 m-auto" tabindex="0">
-        <div class="diff-item-1" role="img" tabindex="0">
-          <div>
-            <picture class="relative object-cover w-full h-full">
-              <source media="(max-width: 767px)" srcset="/classpic-vert.png" />
-
-              <source media="(min-width: 768px)" srcset="/classpic.jpeg" />
-
-              <img
-                src="/bboyrise-comp.jpg"
-                alt="Bboy Rise Sitting In A Chair"
-                class="w-full h-full"
-              />
-            </picture>
+      <div
+        class="hero h-screen bg-[url('/classpic-vert.jpg')] landscape:bg-[url('/classpic.jpeg')] grayscale-75"
+      >
+        <div class="hero-overlay"></div>
+        <div class="hero-content text-neutral-content text-center w-full h-full px-0">
+          <div class="w-full md:w-3/4 text-center h-3/4 flex flex-col mt-15">
+            <h2 class="font-bold text-white text-3xl mb-2 xl:mb-4 xl:text-5xl text-center">
+              About Us
+            </h2>
+            <p class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl pb-5">
+              <b>Rise Studios</b> is a creative hub dedicated to movement, expression, and
+              community. Specializing in <b>breakdance instruction</b>, we offer classes designed
+              for dancers of all levels from beginners building a strong foundation to advanced
+              students refining their craft. Our mission is to inspire confidence, discipline, and
+              creativity through the art of dance.
+            </p>
+            <p
+              class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl pb-5 mt-auto mb-0"
+            >
+              In addition to our own programming, Rise Studios provides <b>studio rentals</b> for
+              outside instructors, organizations, and community groups looking for a welcoming space
+              to host classes, workshops, or events. With an open layout and supportive environment,
+              our studio serves as both a training ground for dancers and a versatile venue for a
+              variety of programs.
+            </p>
+            <p class="text-gray-300 sm:px-10 h-fit text-xs sm:text-lg md:text-2xl mb-0">
+              At Rise Studios, we believe in growth, collaboration, and empowering individuals to
+              rise to their fullest potential on and off the dance floor.
+            </p>
           </div>
         </div>
-        <div class="diff-item-2" role="img">
-          <div>
-            <picture class="object-cover w-full h-full blur-sm brightness-50 absolute">
-              <source media="(max-width: 767px)" srcset="/classpic-vert.png" />
-
-              <source media="(min-width: 768px)" srcset="/classpic.jpeg" />
-
-              <img
-                src="/bboyrise-comp.jpg"
-                alt="Bboy Rise Sitting In A Chair"
-                class="w-full h-full"
-              />
-            </picture>
-
-            <div class="absolute text-center">
-              <h2 class="font-bold text-white pt-5 text-3xl mb-2 xl:mb-4 xl:text-4xl text-center">
-                About Us
-              </h2>
-              <p class="text-gray-300 px-7 sm:px-10 h-fit text-sm sm:text-lg md:text-2xl pb-5">
-                <b>Rise Studios</b> is a creative hub dedicated to movement, expression, and
-                community. Specializing in <b>breakdance instruction</b>, we offer classes designed
-                for dancers of all levels from beginners building a strong foundation to advanced
-                students refining their craft. Our mission is to inspire confidence, discipline, and
-                creativity through the art of dance.
-              </p>
-              <p class="text-gray-300 px-7 sm:px-10 h-fit text-sm sm:text-lg md:text-2xl pb-5">
-                In addition to our own programming, Rise Studios provides <b>studio rentals</b> for
-                outside instructors, organizations, and community groups looking for a welcoming
-                space to host classes, workshops, or events. With an open layout and supportive
-                environment, our studio serves as both a training ground for dancers and a versatile
-                venue for a variety of programs.
-              </p>
-              <p class="text-gray-300 px-7 sm:px-10 h-fit text-sm sm:text-lg md:text-2xl">
-                At Rise Studios, we believe in growth, collaboration, and empowering individuals to
-                rise to their fullest potential on and off the dance floor.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="diff-resizer"></div>
-      </figure>
+      </div>
     </div>
   </div>
 </template>

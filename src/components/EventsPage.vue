@@ -1,67 +1,154 @@
 <template>
-  <div class="m-auto text-white text-6xl">Upcoming Events</div>
+  <div class="m-auto mb-20 text-white text-6xl">Upcoming Events</div>
 
   <div>
     <span v-if="!loaded" class="loading loading-spinner loading-xl text-white" />
     <div v-else class="w-full">
-      <div v-for="(event, i) in events" :key="event.id" class="w-full">
-        <div class="hero w-full">
-          <div
-            class="hero-content flex-col-reverse lg:flex-row w-full"
-            :class="{ 'lg:flex-row-reverse': i % 2 == 1 }"
-          >
-            <div class="flex flex-col items-center">
-              <img
-                :src="supabase.storage.from('images').getPublicUrl(event.image_name).data.publicUrl"
-                class="rounded-lg shadow-2xl"
-                @click="imageRefs.get('image' + i)?.showModal()"
-              />
-              />
-              <dialog
-                :ref="(el) => imageRefs.set('image' + i, el as HTMLDialogElement)"
-                class="modal"
-              >
-                <form method="dialog" class="w-full">
-                  <button class="bg-transparent w-full m-auto">
-                    <img
-                      :src="
-                        supabase.storage.from('images').getPublicUrl(event.image_name).data
-                          .publicUrl
-                      "
-                      class="w-1/2 rounded-lg shadow-2xl m-auto"
-                      @click="imageRefs.get('image' + i)?.showModal()"
-                    />
-                  </button>
-                </form>
-              </dialog>
+      <ul
+        class="timeline timeline-vertical timeline-snap-icon px-5 max-md:timeline-compact lg:w-3/4 xl:w-1/2 lg:m-auto"
+      >
+        <!-- Past Events -->
 
-              <div class="flex flex-row items-center gap-2 mt-5 text-white">
-                <LocationIcon class="w-12 h-12" />
-                <a
-                  :href="event.location_link"
-                  target="_blank"
-                  class="underline hover:text-blue-400 transition-colors duration-300"
-                  >{{ event.location }}</a
-                >
-              </div>
-            </div>
-            <div class="h-full relative">
-              <div class="relative flex flex-row items-center text-white w-full top-0">
-                <div class="flex flex-col justify-center w-25 h-25">
-                  <h1 class="text-5xl">{{ event.date.slice(8, 10) }}</h1>
-                  <h2 class="text-2xl">
-                    {{ monthMap[event.date.slice(5, 7) as keyof typeof monthMap] }}
-                  </h2>
-                </div>
-                <h1 class="text-white text-3xl px-5 flex justify-between w-[calc(100%-6.25rem)]">
-                  <p>{{ event.title }}</p>
-                </h1>
-              </div>
-              <p class="text-xl text-center my-5 px-10 text-white">{{ event.description }}</p>
+        <li v-if="events.total_past > events.past_events.length">
+          <div class="timeline-middle h-6 rounded-full bg-primary m-0.5">Load More</div>
+          <div class="timeline-end"></div>
+          <hr class="bg-primary" />
+        </li>
+        <li v-for="(event, i) in events.past_events" :key="event.id">
+          <hr v-if="i !== 0 || events.total_past > events.past_events.length" class="bg-primary" />
+          <div class="timeline-start text-white mt-0 mb-auto pt-2">
+            {{
+              event.date.slice(5, 7) + '/' + event.date.slice(8, 10) + '/' + event.date.slice(2, 4)
+            }}
+          </div>
+
+          <div class="timeline-middle rounded-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="text-primary h-5 w-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <div class="timeline-end text-white w-full mb-20">
+            <p class="text-3xl">{{ event.title }}</p>
+            <p class="my-3">{{ event.description }}</p>
+            <img
+              :src="supabase.storage.from('images').getPublicUrl(event.image_name).data.publicUrl"
+              class="rounded-lg shadow-2xl w-full md:w-3/4 xl:w-1/2 m-auto"
+              @click="imageRefs.get('image' + i)?.showModal()"
+            />
+            <div class="flex items-center gap-2 mt-5 text-white text-center justify-center">
+              <svg
+                version="1.0"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="800px"
+                height="800px"
+                viewBox="0 0 64 64"
+                enable-background="new 0 0 64 64"
+                xml:space="preserve"
+                class="w-12 h-12"
+              >
+                <path
+                  fill="#ffffff"
+                  d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24
+	C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24
+	C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"
+                />
+              </svg>
+              <a
+                :href="event.location_link"
+                target="_blank"
+                class="underline hover:text-blue-400 transition-colors duration-300"
+                >{{ event.location }}</a
+              >
             </div>
           </div>
-        </div>
-        <div v-if="i !== 2" class="divider" />
+          <hr
+            v-if="i !== events.past_events.length - 1 || events.future_events.length !== 0"
+            :class="{ 'bg-primary': i !== events.past_events.length - 1 }"
+          />
+        </li>
+
+        <!-- Future Events -->
+
+        <li v-for="(event, i) in events.future_events" :key="event.id">
+          <hr v-if="i !== 0 || events.past_events.length !== 0" />
+          <div class="timeline-start text-white mt-0 mb-auto pt-2">
+            {{
+              event.date.slice(5, 7) + '/' + event.date.slice(8, 10) + '/' + event.date.slice(2, 4)
+            }}
+          </div>
+          <div class="timeline-middle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="h-5 w-5"
+            >
+              <path
+                fill-rule="evenodd"
+                color="white"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+
+          <div class="timeline-end text-white w-full mb-20">
+            <p class="text-3xl">{{ event.title }}</p>
+            <p class="my-3">{{ event.description }}</p>
+            <img
+              :src="supabase.storage.from('images').getPublicUrl(event.image_name).data.publicUrl"
+              class="rounded-lg shadow-2xl w-full md:w-1/2 m-auto"
+              @click="imageRefs.get('image' + i)?.showModal()"
+            />
+            <div class="flex items-center gap-2 mt-5 text-white text-center justify-center">
+              <svg
+                version="1.0"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="800px"
+                height="800px"
+                viewBox="0 0 64 64"
+                enable-background="new 0 0 64 64"
+                xml:space="preserve"
+                class="w-12 h-12"
+              >
+                <path
+                  fill="#ffffff"
+                  d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24
+	C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24
+	C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"
+                />
+              </svg>
+              <a
+                :href="event.location_link"
+                target="_blank"
+                class="underline hover:text-blue-400 transition-colors duration-300"
+                >{{ event.location }}</a
+              >
+            </div>
+          </div>
+          <hr
+            v-if="
+              i !== events.future_events.length - 1 ||
+              events.total_future > events.future_events.length
+            "
+          />
+        </li>
+      </ul>
+      <div v-if="events.total_future > events.future_events.length" class="divider">
+        <button class="btn btn-wide btn-dash text-white" @click="loadMore(3)">Load More</button>
       </div>
     </div>
   </div>
@@ -70,42 +157,47 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { supabase } from '@/supabase'
-import LocationIcon from './icons/LocationIcon.vue'
 import type { CustomEvent } from '@/types.ts'
 
 const imageRefs = ref(new Map<string, HTMLDialogElement>())
 
-const monthMap = {
-  '01': 'Jan',
-  '02': 'Feb',
-  '03': 'Mar',
-  '04': 'Apr',
-  '05': 'May',
-  '06': 'Jun',
-  '07': 'Jul',
-  '08': 'Aug',
-  '09': 'Sep',
-  '10': 'Oct',
-  '11': 'Nov',
-  '12': 'Dec',
+interface EventData {
+  total_past: number
+  total_future: number
+  past_events: CustomEvent[]
+  future_events: CustomEvent[]
 }
-const events = ref<CustomEvent[]>([])
+
+const events = ref<EventData>({} as EventData)
 const loaded = ref(false)
 const fetchError = ref('')
-onMounted(async () => {
+
+async function loadMore(ammount: number) {
   const { data, error } = (await supabase
     .from('events')
     .select('*')
-    .gte('date', new Date().toISOString())
+    .gte('date', events.value.future_events[events.value.future_events.length - 1].date)
     .order('date', { ascending: true })
-    .order('time', { ascending: true })
-    .limit(3)) as { data: CustomEvent[]; error: Error | null }
+    .not('id', 'in', `(${events.value.future_events.map((e) => e.id).join(',')})`)
+    .limit(ammount)) as { data: CustomEvent[]; error: Error | null }
+  if (error) return console.log(error)
+  events.value.future_events.push(...data)
+}
+
+onMounted(async () => {
+  const { data, error } = await supabase.rpc('get_adjacent_events', { _past: 1, _future: 4 })
   if (!data || data.length === 0) return (fetchError.value = 'No upcoming events found.')
   else if (error) return (fetchError.value = error.message)
-  const img = supabase.storage.from('images').getPublicUrl(data[0].image_name)
-  console.log(img.data.publicUrl)
   if (error) return (fetchError.value = '')
   events.value = data
   loaded.value = true
 })
 </script>
+<style scoped>
+@media (width>40rem) {
+  .timeline,
+  .timeline-snap-icon > li {
+    --timeline-col-start: 5rem;
+  }
+}
+</style>

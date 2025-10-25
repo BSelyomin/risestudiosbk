@@ -32,15 +32,11 @@
         <h1 class="text-2xl text-shadow-md text-shadow-black">{{ item.name }}</h1>
         <p class="text-gray-300 mb-4 text-shadow-md text-shadow-black">More Info &#8595;</p>
       </div>
-      <div class="absolute h-full w-full top-0">
-        <div
-          class="absolute bg-black h-2/3 rounded-[3rem] transition-all duration-1000 ease-in-out top-1/6"
-          :class="{
-            'w-[90%] left-[5%] sm:w-3/4 sm:left-1/8 opacity-100': classDesc[item.id],
-            'w-0 left-1/2 opacity-0': !classDesc[item.id],
-          }"
-          :style="{ backgroundColor: `rgba(0,0,0,${classDesc[item.id] ? '.85' : '0'}` }"
-        >
+      <div
+        class="relative h-full w-full transition-all duration-1000"
+        :class="{ '-top-full': classDesc[item.id], 'top-0': !classDesc[item.id] }"
+      >
+        <div class="bg-black h-2/3 rounded-[3rem] transition-all duration-1000 ease-in-out top-1/6">
           <div
             class="relative top-0 left-0 w-full h-full pt-5 pb-10 transition-all duration-1000 ease-in"
           >
@@ -53,7 +49,7 @@
 
             <p
               v-show="classAnimation"
-              class="h-[90%] text-gray-400 overflow-x-auto px-7 sm:px-10 mx-auto text-md sm:text-sm lg:text-lg xl:text-xl"
+              class="h-[90%] text-gray-400 whitespace-pre-line overflow-x-auto px-7 sm:px-10 mx-auto text-md sm:text-sm lg:text-lg xl:text-xl"
             >
               {{ item.desc }}
             </p>
@@ -74,7 +70,7 @@
 import { ref, computed, reactive } from 'vue'
 
 const classDesc = reactive({
-  breakdanceTeen: false,
+  babyBreaks: false,
   breakdanceYouth: false,
   yoga: false,
   fitness: false,
@@ -99,37 +95,32 @@ interface classesType {
 
 const classes: classesType[] = [
   {
-    id: 'breakdanceTeen',
-    name: 'Breakdance Teen',
-    image:
-      'https://images.squarespace-cdn.com/content/v1/5927ce5adb29d63a65e17cd1/1625249455710-88J0CYBH3FAQYVRTSMMV/_DSC2620.jpg',
-    desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
+    id: 'babyBreaks',
+    name: 'Baby Breaks',
+    image: '/IMG_3368.jpg',
+    desc: 'Introduction to movement, rhythm, and fun. \n 4-5 years old \n Thursday: 6:00-6:45 PM \n Saturday: 10:00-10:45 AM ',
   },
   {
     id: 'breakdanceYouth',
-    name: 'Breakdance Youth',
-    image:
-      'https://images.squarespace-cdn.com/content/v1/5f64f5d0f09c6a2338e18ec1/3f0fd898-9fbc-4e01-8c5c-5671b433d682/AD5F457A-B084-44F9-A48C-FDE748DA9B6A.jpeg',
-    desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
+    name: 'Beginner/Intermediate',
+    image: '/img_6129.JPG',
+    desc: 'Focus on battle concepts, foundations, and freezes. \n 6+ years old \n Friday: 5:30-6:30 PM \n Friday: 6:30-7:30 PM',
   },
   {
     id: 'yoga',
     name: 'Yoga',
-    image:
-      'https://media.istockphoto.com/id/1481360198/photo/yoga-class-stretching-exercise-and-women-together-for-fitness-peace-and-wellness-instructor.jpg?s=612x612&w=0&k=20&c=iwIJI9NrNWLnZhOCfn7lEe8IYLdlDm0j7FbvXXWlqek=',
-    desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
+    image: '/IMG_9496.JPG',
+    desc: 'Focus on battle concepts, foundations, and freezes. \n 6+ years old \n Friday: 5:30-6:30 PM \n Friday: 6:30-7:30 PM',
   },
   {
     id: 'fitness',
     name: 'Fitness',
-    image:
-      'https://cdn.prod.website-files.com/65d7b904c0af185c6d721f6f/66745b16786e4667065274df_Friends-Taking-Fitness-Class-NewYorkCity.webp',
+    image: 'headstand.jpg',
     desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
   },
 ]
 
 const classDescVisible = computed(
-  () =>
-    classDesc.breakdanceTeen || classDesc.breakdanceYouth || classDesc.yoga || classDesc.fitness,
+  () => classDesc.babyBreaks || classDesc.breakdanceYouth || classDesc.yoga || classDesc.fitness,
 )
 </script>
