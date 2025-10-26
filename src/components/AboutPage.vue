@@ -28,7 +28,7 @@
     </div>
   </div>
   <div>
-    <div class="mb-[calc(55vh+20rem)] h-10" ref="aboutUs" id="aboutUs">
+    <div class="mb-[calc(100vh-10rem)] h-10" ref="aboutUs" id="aboutUs">
       <div
         class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
       >
@@ -67,6 +67,7 @@
       </div>
     </div>
   </div>
+  <div class="h-10 w-full"></div>
 </template>
 <script lang="ts" setup>
 import { onMounted, onUnmounted, useTemplateRef, watch } from 'vue'
@@ -110,7 +111,7 @@ onMounted(() => {
   const options: IntersectionObserverInit = {
     root: null,
     rootMargin: '0px',
-    threshold: 0,
+    threshold: 0.1,
   }
 
   observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {

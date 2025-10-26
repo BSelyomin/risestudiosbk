@@ -9,13 +9,8 @@
       >
         <!-- Past Events -->
 
-        <li v-if="events.total_past > events.past_events.length">
-          <div class="timeline-middle h-6 rounded-full bg-primary m-0.5">Load More</div>
-          <div class="timeline-end"></div>
-          <hr class="bg-primary" />
-        </li>
         <li v-for="(event, i) in events.past_events" :key="event.id">
-          <hr v-if="i !== 0 || events.total_past > events.past_events.length" class="bg-primary" />
+          <hr class="bg-primary" />
           <div class="timeline-start text-white mt-0 mb-auto pt-2">
             {{
               event.date.slice(5, 7) + '/' + event.date.slice(8, 10) + '/' + event.date.slice(2, 4)
