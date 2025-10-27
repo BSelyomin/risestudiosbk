@@ -20,29 +20,16 @@
           <p class="validator-hint">This field is required.</p>
         </fieldset>
 
-        <span class="flex flex-row space-x-4">
-          <fieldset class="form-control flex-1">
-            <legend class="fieldset-legend text-sm py-1">Select A Date</legend>
-            <input
-              type="date"
-              class="input input-bordered w-full custom-input validator"
-              v-model="newEvent.date"
-              required
-            />
-            <p class="validator-hint">This field is required.</p>
-          </fieldset>
-
-          <fieldset class="form-control flex-1">
-            <legend class="fieldset-legend text-sm py-1">Select A Time</legend>
-            <input
-              type="time"
-              class="input input-bordered w-full custom-input validator"
-              v-model="newEvent.time"
-              required
-            />
-            <p class="validator-hint">This field is required.</p>
-          </fieldset>
-        </span>
+        <fieldset class="form-control flex-1">
+          <legend class="fieldset-legend text-sm py-1">Select A Date</legend>
+          <input
+            type="date"
+            class="input input-bordered w-full custom-input validator"
+            v-model="newEvent.date"
+            required
+          />
+          <p class="validator-hint">This field is required.</p>
+        </fieldset>
 
         <fieldset class="form-control">
           <legend class="fieldset-legend text-sm py-1">Description</legend>
@@ -50,9 +37,7 @@
             class="textarea w-full validator"
             placeholder="Description"
             v-model="newEvent.description"
-            required
           ></textarea>
-          <p class="validator-hint">This field is required.</p>
         </fieldset>
 
         <fieldset class="form-control">
@@ -145,8 +130,6 @@ async function submitForm() {
   if (
     !newEvent.title ||
     !newEvent.date ||
-    !newEvent.time ||
-    !newEvent.description ||
     !newEvent.location ||
     !newEvent.location_link ||
     !newEvent.image
@@ -159,7 +142,6 @@ async function submitForm() {
     {
       title: newEvent.title,
       date: newEvent.date,
-      time: newEvent.time,
       description: newEvent.description,
       image_name: newEvent.image_name,
       location: newEvent.location,
