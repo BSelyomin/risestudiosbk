@@ -20,9 +20,9 @@
         </p>
       </h3>
       <img
-        src="https://images.unsplash.com/photo-1611435263724-3f3c4e4cca27?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src="/freeze1.JPG"
         alt="Breakdancer Dancing"
-        class="relative h-screen w-screen object-cover -z-2 opacity-30"
+        class="relative h-screen w-screen object-cover -z-2 opacity-50 object-center"
         :style="{ opacity: Math.min(0.3, 1 / (scroll / 100)) - 0.05 }"
       />
     </div>

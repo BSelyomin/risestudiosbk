@@ -12,13 +12,14 @@
         :alt="`${item.name} Class`"
       />
       <div
-        class="relative h-fit transition-all sm:top-0 duration-500 text-white font-semibold ease-in-out underline sm:no-underline underline-offset-2 -top-[calc(20%+1rem)] sm:group-hover:-translate-y-[calc(100%+1rem)]"
+        class="relative h-fit transition-all sm:top-0 duration-500 text-white font-semibold ease-in-out underline sm:no-underline underline-offset-2"
+        :class="{ '-top-[calc(20%+1rem)] sm:-translate-y-[calc(100%+1rem)]': !classDesc[item.id] }"
       >
         <h1 class="text-2xl text-shadow-md text-shadow-black">{{ item.name }}</h1>
         <p class="text-gray-300 mb-4 text-shadow-md text-shadow-black">More Info &#8595;</p>
       </div>
       <div
-        class="absolute left-0 w-full transition-all duration-1000 ease-in-out -bottom-full bg-black rounded-t-[3rem] px-7 sm:px-10 py-8"
+        class="absolute left-1/20 w-9/10 transition-all duration-1000 ease-in-out -bottom-full bg-[rgba(0,0,0,0.85)] rounded-t-[3rem] px-7 sm:px-10 py-8"
         :class="{ 'bottom-0': classDesc[item.id] }"
       >
         <div class="relative w-full">
@@ -46,8 +47,8 @@ import { reactive } from 'vue'
 const classDesc = reactive({
   babyBreaks: false,
   breakdanceYouth: false,
-  yoga: false,
-  fitness: false,
+  intermediate: false,
+  advanced: false,
 })
 
 interface classesType {
@@ -62,25 +63,25 @@ const classes: classesType[] = [
     id: 'babyBreaks',
     name: 'Baby Breaks',
     image: '/IMG_3368.jpg',
-    desc: 'Introduction to movement, rhythm, and fun. \n 4-5 years old \n Thursday: 6:00-6:45 PM \n Saturday: 10:00-10:45 AM ',
+    desc: 'Introduction to movement, rhythm, and fun. \n (4-5 years old) \n Thursday: 6:00-6:45 PM \n Saturday: 10:00-10:45 AM ',
   },
   {
     id: 'breakdanceYouth',
-    name: 'Beginner/Intermediate',
+    name: 'Beginner',
     image: '/img_6129.JPG',
-    desc: 'Focus on battle concepts, foundations, and freezes. \n 6+ years old \n Friday: 5:30-6:30 PM \n Friday: 6:30-7:30 PM',
+    desc: 'Focus on battle concepts, foundations, and freezes. \n (6+ years old) \n Friday: 5:30-6:30 PM \n Friday: 6:30-7:30 PM',
   },
   {
-    id: 'yoga',
-    name: 'Yoga',
+    id: 'intermediate',
+    name: 'Intermediate',
     image: '/IMG_9496.JPG',
-    desc: 'Focus on battle concepts, foundations, and freezes. \n 6+ years old \n Friday: 5:30-6:30 PM \n Friday: 6:30-7:30 PM',
+    desc: 'Break down the foundations of power, strength, control, and flow. \n (6+ years old) \n Tuesday: 5:00-6:00 PM \n Thursday: 5:00-6:00 PM \n Saturday: 11:00-12:30 PM',
   },
   {
-    id: 'fitness',
-    name: 'Fitness',
+    id: 'advanced',
+    name: 'Advanced',
     image: 'headstand.jpg',
-    desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. ',
+    desc: 'This class focuses on battle strategy, musicality, and performance exectution. \n Monday: 2:30-4:30 PM \n Friday: 2:30-4:30 PM',
   },
 ]
 </script>
