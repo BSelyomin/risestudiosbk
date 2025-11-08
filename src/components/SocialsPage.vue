@@ -97,7 +97,7 @@
             </svg>
           </div>
           <div class="ml-0 text-left">
-            <p class="text-lg font-semibold mb-2 text-white">Follow us on Instagram</p>
+            <p class="text-lg font-semibold mb-2 text-white">Follow us at Risestudios_bk</p>
             <p class="text-sm text-gray-500 mb-4">View our latest posts and stories</p>
             <a href="https://instagram.com/Risestudios_bk" class="link link-primary">Follow Us</a>
           </div>

@@ -69,14 +69,14 @@
           </div>
           <hr
             v-if="i !== events.past_events.length - 1 || events.future_events.length !== 0"
-            :class="{ 'bg-primary': i !== events.past_events.length - 1 }"
+            class="bg-primary"
           />
         </li>
 
         <!-- Future Events -->
 
         <li v-for="(event, i) in events.future_events" :key="event.id">
-          <hr v-if="i !== 0 || events.past_events.length !== 0" />
+          <hr :class="{ 'bg-primary': events.past_events.length !== 0 && i === 0 }" />
           <div class="timeline-start text-white mt-0 mb-auto pt-2">
             {{
               event.date.slice(5, 7) + '/' + event.date.slice(8, 10) + '/' + event.date.slice(2, 4)

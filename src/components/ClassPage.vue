@@ -81,7 +81,7 @@ const classes: classesType[] = [
     id: 'advanced',
     name: 'Advanced',
     image: 'headstand.jpg',
-    desc: 'This class focuses on battle strategy, musicality, and performance exectution. \n Monday: 2:30-4:30 PM \n Friday: 2:30-4:30 PM',
+    desc: 'This class focuses on battle strategy, musicality, and performance execution. \n Monday: 2:30-4:30 PM \n Friday: 2:30-4:30 PM',
   },
 ]
 </script>

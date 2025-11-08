@@ -20,7 +20,7 @@
         </p>
       </h3>
       <img
-        src="/freeze1.JPG"
+        src="/test.jpeg"
         alt="Breakdancer Dancing"
         class="relative h-screen w-screen object-cover -z-2 opacity-50 object-center"
         :style="{ opacity: Math.min(0.3, 1 / (scroll / 100)) - 0.05 }"

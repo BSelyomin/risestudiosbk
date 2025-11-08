@@ -96,7 +96,6 @@ const addEvent = useTemplateRef('addEvent')
 const newEvent = reactive({
   title: '',
   date: '',
-  time: '',
   description: '',
   image: null as File | null,
   image_name: '',
@@ -118,7 +117,6 @@ async function uploadImage() {
   const fileExtension = newEvent.image.name.split('.').pop() as string
   const fileNameWithoutExt = newEvent.image.name.slice(0, -(fileExtension.length + 1))
   const newName = `${fileNameWithoutExt}-${uuidv4()}.${fileExtension}`
-  console.log(newEvent.image.name)
   const { error } = await supabase.storage
     .from('images')
     .upload(newName, newEvent.image, { upsert: false })
@@ -152,7 +150,6 @@ async function submitForm() {
   addEvent?.value?.close()
   newEvent.title = ''
   newEvent.date = ''
-  newEvent.time = ''
   newEvent.description = ''
   newEvent.image_name = ''
   newEvent.location = ''
