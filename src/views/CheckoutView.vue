@@ -232,66 +232,62 @@ const handleSubmit = async (e: Event) => {
   isProcessing.value = true
 
   try {
-    // Prepare line items for Stripe Checkout
-    const lineItems = shop.cartItemsWithDetails.map((item) => ({
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.product?.name || 'Product',
-          description: item.size ? `Size: ${item.size}` : undefined,
-          images: item.product?.image ? [item.product.image] : undefined,
-        },
-        unit_amount: Math.round((item.product?.price || 0) * 100), // Convert to cents
-      },
-      quantity: item.quantity,
-    }))
-
-    // Add tax as a separate line item
-    lineItems.push({
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: 'Tax (8%)',
-        },
-        unit_amount: Math.round(tax.value * 100), // Convert to cents
-      },
-      quantity: 1,
-    })
-
-    // Store customer info in localStorage for success page
-    localStorage.setItem(
-      'checkout-customer-info',
-      JSON.stringify({
-        name: formData.value.name,
-        email: formData.value.email,
-        address: formData.value.address,
-        city: formData.value.city,
-        postalCode: formData.value.postalCode,
-      }),
-    )
-
-    // Redirect to Stripe Checkout
-    const { error } = await stripe.value.redirectToCheckout({
-      lineItems: lineItems,
-      mode: 'payment',
-      successUrl: `${window.location.origin}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
-      cancelUrl: `${window.location.origin}/checkout`,
-      customerEmail: formData.value.email,
-      shippingAddressCollection: {
-        allowedCountries: ['US', 'CA'],
-      },
-      billingAddressCollection: 'required',
-    })
-
-    if (error) {
-      console.error('Stripe Checkout error:', error)
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to redirect to payment',
-        variant: 'destructive',
-      })
-      isProcessing.value = false
-    }
+    // // Prepare line items for Stripe Checkout
+    // const lineItems = shop.cartItemsWithDetails.map((item) => ({
+    //   price_data: {
+    //     currency: 'usd',
+    //     product_data: {
+    //       name: item.product?.name || 'Product',
+    //       description: item.size ? `Size: ${item.size}` : undefined,
+    //       images: item.product?.image ? [item.product.image] : undefined,
+    //     },
+    //     unit_amount: Math.round((item.product?.price || 0) * 100), // Convert to cents
+    //   },
+    //   quantity: item.quantity,
+    // }))
+    // // Add tax as a separate line item
+    // lineItems.push({
+    //   price_data: {
+    //     currency: 'usd',
+    //     product_data: {
+    //       name: 'Tax (8%)',
+    //     },
+    //     unit_amount: Math.round(tax.value * 100), // Convert to cents
+    //   },
+    //   quantity: 1,
+    // })
+    // // Store customer info in localStorage for success page
+    // localStorage.setItem(
+    //   'checkout-customer-info',
+    //   JSON.stringify({
+    //     name: formData.value.name,
+    //     email: formData.value.email,
+    //     address: formData.value.address,
+    //     city: formData.value.city,
+    //     postalCode: formData.value.postalCode,
+    //   }),
+    // )
+    // // Redirect to Stripe Checkout
+    // const { error } = await stripe.value.redirectToCheckout({
+    //   lineItems: lineItems,
+    //   mode: 'payment',
+    //   successUrl: `${window.location.origin}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+    //   cancelUrl: `${window.location.origin}/checkout`,
+    //   customerEmail: formData.value.email,
+    //   shippingAddressCollection: {
+    //     allowedCountries: ['US', 'CA'],
+    //   },
+    //   billingAddressCollection: 'required',
+    // })
+    // if (error) {
+    //   console.error('Stripe Checkout error:', error)
+    //   toast({
+    //     title: 'Error',
+    //     description: error.message || 'Failed to redirect to payment',
+    //     variant: 'destructive',
+    //   })
+    //   isProcessing.value = false
+    // }
   } catch (error: unknown) {
     console.error('Checkout error:', error)
     toast({
