@@ -4,7 +4,11 @@
       class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
     >
       <div
-        class="hero h-screen bg-[url('/about-us/bboyrise-vert.jpg')] landscape:bg-[url('/about-us/bboyrise.jpg')]"
+        class="hero h-screen bg-cover bg-center transition-[background-image] duration-300 bg-[image:var(--bg-vert)] landscape:bg-[image:var(--bg-land)]"
+        :style="{
+          '--bg-vert': `url('${getResponsiveImage('/about-us/bboyrise-vert.jpg')}')`,
+          '--bg-land': `url('${getResponsiveImage('/about-us/bboyrise.jpg')}')`,
+        }"
       >
         <div class="hero-overlay"></div>
         <div class="hero-content text-neutral-content text-center w-full">
@@ -33,7 +37,11 @@
         class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
       >
         <div
-          class="hero h-screen bg-[url('/about-us/classpic-vert.jpg')] landscape:bg-[url('/about-us/classpic.jpg')] grayscale-75"
+          class="hero h-screen bg-cover bg-center transition-[background-image] duration-300 grayscale-75 bg-[image:var(--bg-vert)] landscape:bg-[image:var(--bg-land)]"
+          :style="{
+            '--bg-vert': `url('${getResponsiveImage('/about-us/classpic-vert.jpg')}')`,
+            '--bg-land': `url('${getResponsiveImage('/about-us/classpic.jpg')}')`,
+          }"
         >
           <div class="hero-overlay"></div>
           <div class="hero-content text-neutral-content text-center w-full h-full px-0">
@@ -71,6 +79,7 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, onUnmounted, useTemplateRef, watch } from 'vue'
+import { getResponsiveImage } from '@/utils'
 
 const props = defineProps<{ scroll: number }>()
 

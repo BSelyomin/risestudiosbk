@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getResponsiveImage = (url: string, mult: number = 1) => {
+  if (import.meta.env.VITE_DEV) return url
   const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1200
   let width = 1280 // Default for XL/Desktop
 
@@ -26,7 +27,6 @@ export const getResponsiveImage = (url: string, mult: number = 1) => {
     fit: 'contain',
     url: url,
   })
-  if (import.meta.env.VITE_DEV) return url
 
   return `/.netlify/images?${params.toString()}`
 }
