@@ -19,12 +19,22 @@
           &#8204; &#9013;
         </p>
       </h3>
-      <img
-        src="/test.jpeg"
+      <!-- :src="'https://risestudiosbk.netlify.app/.netlify/images?url=/test.jpeg&h=' + height" -->
+      <!-- <img
+        src="/cover.jpg"
         alt="Breakdancer Dancing"
-        class="relative h-screen w-screen object-cover -z-2 opacity-50 object-center"
-        :style="{ opacity: Math.min(0.3, 1 / (scroll / 100)) - 0.05 }"
-      />
+        class="relative h-screen w-screen object-cover -z-2 object-center"
+        :style="{ opacity: Math.min(0.5, 1 / (scroll / 100)) - 0.05 }"
+      /> -->
+      <video
+        width="320"
+        height="240"
+        controls
+        class="relative h-screen w-screen object-cover -z-2 object-center"
+      >
+        <source src="/RiseStudios_v2.mov" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
   </header>
 </template>
@@ -33,6 +43,11 @@
 import { ref, useTemplateRef, onMounted } from 'vue'
 
 defineProps<{ scroll: number }>()
+
+const height = ref(window.innerHeight)
+window.addEventListener('resize', () => {
+  if (window.innerHeight !== height.value) height.value = window.innerHeight
+})
 
 const title = useTemplateRef('title')
 const titleBounds = ref<DOMRect | null>(null)

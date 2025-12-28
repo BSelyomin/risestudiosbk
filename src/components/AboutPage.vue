@@ -4,7 +4,7 @@
       class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
     >
       <div
-        class="hero h-screen bg-[url('/bboyrise.jpeg')] landscape:bg-[url('/bboyrise-comp.jpg')]"
+        class="hero h-screen bg-[url('/about-us/bboyrise-vert.jpg')] landscape:bg-[url('/about-us/bboyrise.jpg')]"
       >
         <div class="hero-overlay"></div>
         <div class="hero-content text-neutral-content text-center w-full">
@@ -33,7 +33,7 @@
         class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center transition-all duration-500 opacity-0 pointer-events-none"
       >
         <div
-          class="hero h-screen bg-[url('/classpic-vert.jpg')] landscape:bg-[url('/classpic.jpeg')] grayscale-75"
+          class="hero h-screen bg-[url('/about-us/classpic-vert.jpg')] landscape:bg-[url('/about-us/classpic.jpg')] grayscale-75"
         >
           <div class="hero-overlay"></div>
           <div class="hero-content text-neutral-content text-center w-full h-full px-0">

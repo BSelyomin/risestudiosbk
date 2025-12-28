@@ -62,25 +62,25 @@ const classes: classesType[] = [
   {
     id: 'babyBreaks',
     name: 'Baby Breaks',
-    image: '/IMG_3368.jpg',
+    image: '/classes/baby-breaks.jpg',
     desc: 'Introduction to movement, rhythm, and fun. \n (4-5 years old) \n Thursday: 6:00-6:45 PM \n Saturday: 10:00-10:45 AM ',
   },
   {
     id: 'breakdanceYouth',
     name: 'Beginner',
-    image: '/img_6129.JPG',
+    image: '/classes/IMG_4877.JPG',
     desc: 'Focus on battle concepts, foundations, and freezes. \n (6+ years old) \n Friday: 5:30-6:30 PM \n Friday: 6:30-7:30 PM',
   },
   {
     id: 'intermediate',
     name: 'Intermediate',
-    image: '/IMG_9496.JPG',
+    image: '/classes/intermediate.jpg',
     desc: 'Break down the foundations of power, strength, control, and flow. \n (6+ years old) \n Tuesday: 5:00-6:00 PM \n Thursday: 5:00-6:00 PM \n Saturday: 11:00-12:30 PM',
   },
   {
     id: 'advanced',
     name: 'Advanced',
-    image: 'headstand.jpg',
+    image: '/classes/advanced.jpg',
     desc: 'This class focuses on battle strategy, musicality, and performance execution. \n Monday: 2:30-4:30 PM \n Friday: 2:30-4:30 PM',
   },
 ]
