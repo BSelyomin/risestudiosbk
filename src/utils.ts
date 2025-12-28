@@ -23,10 +23,11 @@ export const getResponsiveImage = (url: string) => {
     w: finalWidth.toString(),
     q: dpr > 1 ? '65' : '80',
     fm: 'webp',
-    fit: 'cover',
+    fit: 'contain',
+    url: url,
   })
 
-  return `${url}?${params.toString()}`
+  return `/.netlify/images?${params.toString()}`
 }
 
 import { useToast, TYPE, POSITION } from 'vue-toastification'
