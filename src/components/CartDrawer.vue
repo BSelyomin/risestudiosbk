@@ -39,7 +39,7 @@
               >
                 <div class="w-20 h-20 rounded-md overflow-hidden bg-card flex-shrink-0">
                   <img
-                    :src="item.product?.image"
+                    :src="getResponsiveImage(item.product?.image as string, 0.1)"
                     :alt="item.product?.name"
                     class="w-full h-full object-cover"
                     :data-testid="`img-cart-item-${item.id}`"
@@ -147,6 +147,7 @@ import Badge from '@/components/ui/BadgeEl.vue'
 import Separator from '@/components/ui/SeparatorEl.vue'
 import ScrollArea from '@/components/ui/ScrollArea.vue'
 import PlusSVG from './svgs/PlusSVG.vue'
+import { getResponsiveImage } from '@/utils'
 
 const shop = useShopStore()
 const router = useRouter()

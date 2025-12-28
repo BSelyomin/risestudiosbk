@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const getResponsiveImage = (url: string) => {
+export const getResponsiveImage = (url: string, mult: number = 1) => {
   const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1200
   let width = 1280 // Default for XL/Desktop
 
@@ -17,7 +17,7 @@ export const getResponsiveImage = (url: string) => {
 
   const dpr = window.devicePixelRatio || 1
 
-  const finalWidth = Math.min(Math.round(width * dpr), 3840)
+  const finalWidth = Math.min(Math.round(width * dpr), 3840) * mult
 
   const params = new URLSearchParams({
     w: finalWidth.toString(),
@@ -26,6 +26,7 @@ export const getResponsiveImage = (url: string) => {
     fit: 'contain',
     url: url,
   })
+  if (import.meta.env.VITE_DEV) return url
 
   return `/.netlify/images?${params.toString()}`
 }
