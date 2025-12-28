@@ -3,12 +3,7 @@
     <p class="text-lg">Loading products...</p>
   </div>
   <div v-else class="min-h-screen">
-    <Header
-      :cart-items="shop.cartItemsWithDetails"
-      @update-quantity="handleUpdateQuantity"
-      @remove-item="handleRemoveItem"
-      @checkout="handleCheckout"
-    />
+    <Header />
     <div class="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
       <div class="absolute inset-0">
         <img src="/crew.jpg" alt="Breakdancer in action" class="w-full h-full object-cover" />
@@ -76,7 +71,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
 import Header from '@/components/HeaderComp.vue'
 import ProductCard from '@/components/ProductCard.vue'
 import { toast } from '@/utils'
@@ -85,7 +79,6 @@ import { useShopStore } from '@/stores/shop'
 import type { size } from '@/types'
 
 const shop = useShopStore()
-const router = useRouter()
 const activeCategory = ref('ALL')
 
 const categories = ['ALL', 'APPAREL', 'ACCESSORIES']
@@ -104,7 +97,6 @@ const handleAddToCart = async (productId: number, size: size) => {
   try {
     shop.addToCart(productId, size)
     toast({
-      title: 'Added to cart',
       description: `${product.name} has been added to your cart.`,
     })
   } catch (error: unknown) {
@@ -116,36 +108,4 @@ const handleAddToCart = async (productId: number, size: size) => {
     })
   }
 }
-
-const handleUpdateQuantity = async (productId: number, size: size, newQuantity: number) => {
-  try {
-    shop.updateQuantity(productId, size, newQuantity)
-  } catch (error: unknown) {
-    console.log(error)
-    toast({
-      title: 'Error',
-      description: 'Failed to update quantity.',
-      variant: 'destructive',
-    })
-  }
-}
-
-const handleRemoveItem = async (productId: number, size: string | null) => {
-  try {
-    shop.removeFromCart(productId, size)
-    toast({
-      title: 'Removed from cart',
-      description: 'Item has been removed from your cart.',
-    })
-  } catch (error: unknown) {
-    console.log(error)
-    toast({
-      title: 'Error',
-      description: 'Failed to remove item.',
-      variant: 'destructive',
-    })
-  }
-}
-
-const handleCheckout = () => router.push('/checkout')
 </script>

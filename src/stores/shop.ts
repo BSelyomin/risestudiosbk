@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import * as XLSX from 'xlsx'
 import type { CartItem, Product, size } from '@/types'
+import { toast } from '@/utils'
 
 interface ProductFromFile {
   ID: number
@@ -119,26 +120,47 @@ export const useShopStore = defineStore('shop', () => {
   }
 
   const updateQuantity = (productId: number, size: string, newQuantity: number) => {
-    const itemIndex = cartItems.value.findIndex(
-      (item) => item.id === productId && item.size === size,
-    )
+    try {
+      const itemIndex = cartItems.value.findIndex(
+        (item) => item.id === productId && item.size === size,
+      )
 
-    if (itemIndex !== -1) {
-      if (newQuantity <= 0) cartItems.value.splice(itemIndex, 1)
-      else cartItems.value[itemIndex].quantity = newQuantity
+      if (itemIndex !== -1) {
+        if (newQuantity <= 0) cartItems.value.splice(itemIndex, 1)
+        else cartItems.value[itemIndex].quantity = newQuantity
 
-      saveCartToStorage()
+        saveCartToStorage()
+      }
+    } catch (error: unknown) {
+      console.log(error)
+      toast({
+        title: 'Error',
+        description: 'Failed to update quantity.',
+        variant: 'destructive',
+      })
     }
   }
 
   const removeFromCart = (productId: number, size: string | null) => {
-    const itemIndex = cartItems.value.findIndex(
-      (item) => item.id === productId && item.size === size,
-    )
-
-    if (itemIndex !== -1) {
-      cartItems.value.splice(itemIndex, 1)
-      saveCartToStorage()
+    try {
+      const itemIndex = cartItems.value.findIndex(
+        (item) => item.id === productId && item.size === size,
+      )
+      if (itemIndex !== -1) {
+        cartItems.value.splice(itemIndex, 1)
+        saveCartToStorage()
+      }
+      console.log('hi')
+      toast({
+        description: 'Item has been removed from your cart.',
+      })
+    } catch (error: unknown) {
+      console.log(error)
+      toast({
+        title: 'Error',
+        description: 'Failed to remove item.',
+        variant: 'destructive',
+      })
     }
   }
 

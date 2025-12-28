@@ -15,7 +15,7 @@ export const getResponsiveImage = (url: string) => {
     width = 1024 // Tablet
   }
 
-  const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1
+  const dpr = window.devicePixelRatio || 1
 
   const finalWidth = Math.min(Math.round(width * dpr), 3840)
 
@@ -33,7 +33,7 @@ import { useToast, TYPE, POSITION } from 'vue-toastification'
 import type { ToastOptions } from 'vue-toastification/dist/types/types'
 
 export interface CustomToastProps {
-  title: string
+  title?: string
   description: string
   variant?: 'default' | 'success' | 'info' | 'warning' | 'error' | 'destructive' // Using common toast types
 }
@@ -42,7 +42,11 @@ export type CustomToastFunction = (props: CustomToastProps) => void
 
 const libraryToast = useToast()
 
-export const customToast: CustomToastFunction = ({ title, description, variant = 'default' }) => {
+export const customToast: CustomToastFunction = ({
+  title = '',
+  description,
+  variant = 'default',
+}) => {
   let toastType = TYPE.DEFAULT
   let styleOptions: ToastOptions = {}
 
@@ -66,11 +70,11 @@ export const customToast: CustomToastFunction = ({ title, description, variant =
       break
   }
 
-  const message = `<strong>${title}</strong><br>${description}`
+  const message = title ? `${title}: ${description}` : description
 
   styleOptions = {
     type: toastType,
-    position: POSITION.BOTTOM_RIGHT,
+    position: POSITION.TOP_RIGHT,
     timeout: 5000,
   }
 
