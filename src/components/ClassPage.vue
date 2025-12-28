@@ -7,7 +7,7 @@
       @click="classDesc[item.id] = !classDesc[item.id]"
     >
       <img
-        :src="item.image"
+        :src="getResponsiveImage(item.image, 0.25)"
         class="h-full w-full object-cover transition-all duration-1000 ease-in-out sm:group-hover:grayscale-75 sm:group-hover:scale-110"
         :alt="`${item.name} Class`"
       />
@@ -43,6 +43,7 @@
 </template>
 <script lang="ts" setup>
 import { reactive } from 'vue'
+import { getResponsiveImage } from '@/utils'
 
 const classDesc = reactive({
   babyBreaks: false,

@@ -6,7 +6,11 @@
     <Header />
     <div class="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
       <div class="absolute inset-0">
-        <img src="/crew.jpg" alt="Breakdancer in action" class="w-full h-full object-cover" />
+        <img
+          :src="getResponsiveImage('/crew.jpg')"
+          alt="Breakdancer in action"
+          class="w-full h-full object-cover"
+        />
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
       </div>
       <div
@@ -73,7 +77,7 @@
 import { ref, computed } from 'vue'
 import Header from '@/components/HeaderComp.vue'
 import ProductCard from '@/components/ProductCard.vue'
-import { toast } from '@/utils'
+import { getResponsiveImage, toast } from '@/utils'
 import Button from '@/components/ui/ButtonEl.vue'
 import { useShopStore } from '@/stores/shop'
 import type { size } from '@/types'

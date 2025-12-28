@@ -4,6 +4,7 @@ import ShoppingCart from './svgs/ShoppingCart.vue'
 import Card from '@/components/ui/CardEl.vue'
 import Button from '@/components/ui/ButtonEl.vue'
 import type { Product, size } from '@/types'
+import { getResponsiveImage } from '@/utils'
 
 const props = withDefaults(defineProps<{ product: Product }>(), {})
 
@@ -43,7 +44,7 @@ const handleAddToCart = () => {
   >
     <div class="relative aspect-square overflow-hidden bg-card">
       <img
-        :src="product.image"
+        :src="getResponsiveImage(product.image)"
         :alt="product.name"
         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         :data-testid="`img-product-${product.id}`"

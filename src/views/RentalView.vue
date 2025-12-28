@@ -248,7 +248,7 @@
         </svg>
       </button>
       <img
-        :src="images[selectedImage]"
+        :src="getResponsiveImage(images[selectedImage])"
         class="max-h-[85vh] max-w-full rounded shadow-2xl object-contain"
       />
       <button

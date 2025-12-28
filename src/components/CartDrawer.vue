@@ -12,7 +12,7 @@
         </Badge>
       </Button>
     </SheetTrigger>
-    <SheetContent class="w-full sm:max-w-md flex flex-col" data-testid="drawer-cart">
+    <SheetContent class="w-[90%] sm:max-w-md flex flex-col" data-testid="drawer-cart">
       <div class="flex flex-col gap-4">
         <div>
           <h2 class="font-heading text-2xl uppercase tracking-tight">Shopping Cart</h2>

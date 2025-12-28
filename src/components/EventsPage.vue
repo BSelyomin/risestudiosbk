@@ -34,7 +34,7 @@
             <p class="text-3xl">{{ event.title }}</p>
             <p class="my-3">{{ event.description }}</p>
             <img
-              :src="event.image_name"
+              :src="getResponsiveImage(event.image_name)"
               class="rounded-lg shadow-2xl w-full md:w-3/4 xl:w-1/2 m-auto cursor-pointer"
               @click="imageRefs.get('image' + i)?.showModal()"
               loading="lazy"
@@ -51,7 +51,11 @@
                     ✕
                   </button>
                 </form>
-                <img :src="event.image_name" class="w-full" alt="Full size image" />
+                <img
+                  :src="getResponsiveImage(event.image_name)"
+                  class="w-full"
+                  alt="Full size image"
+                />
               </div>
               <form method="dialog" class="modal-backdrop">
                 <button>close</button>
@@ -118,7 +122,7 @@
             <p class="text-3xl">{{ event.title }}</p>
             <p class="my-3">{{ event.description }}</p>
             <img
-              :src="event.image_name"
+              :src="getResponsiveImage(event.image_name)"
               class="rounded-lg shadow-2xl w-full md:w-1/2 m-auto cursor-pointer"
               @click="imageRefs.get('future-image' + i)?.showModal()"
               loading="lazy"
@@ -135,7 +139,11 @@
                     ✕
                   </button>
                 </form>
-                <img :src="event.image_name" class="w-full" alt="Full size image" />
+                <img
+                  :src="getResponsiveImage(event.image_name)"
+                  class="w-full"
+                  alt="Full size image"
+                />
               </div>
               <form method="dialog" class="modal-backdrop">
                 <button>close</button>
@@ -179,6 +187,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import * as XLSX from 'xlsx'
+import { getResponsiveImage } from '@/utils'
 
 const imageRefs = ref(new Map<string, HTMLDialogElement>())
 
