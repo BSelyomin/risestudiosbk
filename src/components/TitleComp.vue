@@ -5,7 +5,7 @@
   >
     <div class="fixed text-[64px] top-0" ref="title" :style="styles">
       <h3
-        class="w-screen font-black metallic-copper text-center py-5 fixed text-[calc(max(64px,25vw)/4)] md:text-[calc(max(192px,20vw)/4)] lg:text-[calc(max(205px,15vw)/4)]"
+        class="w-screen font-black metallic-copper text-center py-5 fixed text-[calc(max(64px,25vw)/4)] md:text-[calc(max(192px,20vw)/4)] lg:text-[calc(max(205px,15vw)/4)] pointer-events-none"
         ref="title"
         :style="{
           ...styles,
@@ -19,17 +19,12 @@
           &#8204; &#9013;
         </p>
       </h3>
-      <!-- :src="'https://risestudiosbk.netlify.app/.netlify/images?url=/test.jpeg&h=' + height" -->
-      <!-- <img
-        src="/cover.jpg"
-        alt="Breakdancer Dancing"
-        class="relative h-screen w-screen object-cover -z-2 object-center"
-        :style="{ opacity: Math.min(0.5, 1 / (scroll / 100)) - 0.05 }"
-      /> -->
       <video
         width="320"
         height="240"
         controls
+        autoplay
+        playsinline
         class="relative h-screen w-screen object-cover -z-2 object-center"
       >
         <source src="/RiseStudios_v2.mov" type="video/mp4" />

@@ -150,7 +150,6 @@ export const useShopStore = defineStore('shop', () => {
         cartItems.value.splice(itemIndex, 1)
         saveCartToStorage()
       }
-      console.log('hi')
       toast({
         description: 'Item has been removed from your cart.',
       })

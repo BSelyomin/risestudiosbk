@@ -34,7 +34,7 @@
             <p class="text-3xl">{{ event.title }}</p>
             <p class="my-3">{{ event.description }}</p>
             <img
-              :src="getResponsiveImage(event.image_name)"
+              :src="getResponsiveImage(event.image_name, 0.5)"
               class="rounded-lg shadow-2xl w-full md:w-3/4 xl:w-1/2 m-auto cursor-pointer"
               @click="imageRefs.get('image' + i)?.showModal()"
               loading="lazy"
@@ -122,7 +122,7 @@
             <p class="text-3xl">{{ event.title }}</p>
             <p class="my-3">{{ event.description }}</p>
             <img
-              :src="getResponsiveImage(event.image_name)"
+              :src="getResponsiveImage(event.image_name, 0.5)"
               class="rounded-lg shadow-2xl w-full md:w-1/2 m-auto cursor-pointer"
               @click="imageRefs.get('future-image' + i)?.showModal()"
               loading="lazy"
@@ -256,7 +256,6 @@ async function loadEventsFromExcel() {
 
     const worksheet = workbook.Sheets['Events']
     const rawData = XLSX.utils.sheet_to_json(worksheet) as EventFromFile[]
-    console.log(rawData)
 
     // Process and format the events
     const allEvents: CustomEvent[] = rawData.map((row) => ({
