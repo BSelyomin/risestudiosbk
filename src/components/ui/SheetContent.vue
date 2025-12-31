@@ -28,7 +28,7 @@ const { isOpen, toggle } = context
         v-if="isOpen"
         :class="
           cn(
-            'fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out inset-y-0 right-0 h-full border-l',
+            'fixed z-50 gap-4 bg-background  shadow-lg transition ease-in-out inset-y-0 right-0 h-full border-l',
             props.class,
           )
         "

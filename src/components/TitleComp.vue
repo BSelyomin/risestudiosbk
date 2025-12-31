@@ -26,7 +26,6 @@
       <video
         controls
         autoplay
-        muted
         playsinline
         class="relative h-[100svh] w-screen object-cover -z-2 object-center pb-[env(safe-area-inset-bottom)]"
       >
