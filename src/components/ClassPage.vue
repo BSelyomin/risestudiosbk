@@ -7,7 +7,7 @@
       @click="classDesc[item.id] = !classDesc[item.id]"
     >
       <img
-        :src="getResponsiveImage(item.image, 0.25)"
+        :src="getResponsiveImage(item.image, 0.5)"
         class="h-full w-full object-cover transition-all duration-1000 ease-in-out sm:group-hover:grayscale-75 sm:group-hover:scale-110"
         :alt="`${item.name} Class`"
       />
@@ -70,7 +70,7 @@ const classes: classesType[] = [
     id: 'breakdanceYouth',
     name: 'Beginner',
     image: '/classes/IMG_4877.JPG',
-    desc: 'Focus on battle concepts, foundations, and freezes. \n (6+ years old) \n Friday: 5:30-6:30 PM \n Friday: 6:30-7:30 PM',
+    desc: 'Focus on battle concepts, foundations, and freezes. \n (6+ years old) \n Friday: 5:30-6:30 PM \n Friday: 6:30-7:30 PM \n Thursday: 6:45 - 7:45 PM',
   },
   {
     id: 'intermediate',
