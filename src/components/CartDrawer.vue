@@ -218,10 +218,27 @@ const zelleModal = ref<HTMLDialogElement | null>(null) // Reference to the daisy
 const zelleEmail = 'risestudiosbk@gmail.com'
 
 const memoText = computed(() => {
-  const items = shop.cartItemsWithDetails
-    .map((item) => `${item.quantity}x ${item.product?.name}`)
-    .join(', ')
-  return `Order: ${items}`.substring(0, 100)
+  // 1. Group items by product name
+  const grouped = shop.cartItemsWithDetails.reduce(
+    (acc, item) => {
+      const name = item.product?.id || 'Unknown'
+      const sizeStr = `${item.quantity}${item.size || ''}`
+
+      if (!acc[name]) {
+        acc[name] = []
+      }
+      acc[name].push(sizeStr)
+      return acc
+    },
+    {} as Record<string, string[]>,
+  )
+
+  // 2. Format into "Name: 1L 2M" string
+  const summary = Object.entries(grouped)
+    .map(([name, sizes]) => `${name}: ${sizes.join(' ')}`)
+    .join(' | ') // Using " | " to separate different products
+
+  return summary
 })
 
 const openPaymentModal = () => {
@@ -230,7 +247,6 @@ const openPaymentModal = () => {
 
 const copyText = (text: string) => {
   navigator.clipboard.writeText(text)
-  // Optional: add a small toast or temporary button text change
   alert('Copied to clipboard!')
 }
 </script>
