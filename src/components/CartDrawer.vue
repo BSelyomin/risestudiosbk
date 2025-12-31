@@ -122,8 +122,13 @@
                 <span class="font-bold" data-testid="text-total">${{ total.toFixed(2) }}</span>
               </div>
             </div>
-            <Button class="w-full" size="lg" @click="handleCheckout" data-testid="button-checkout">
-              CHECKOUT
+            <Button
+              class="w-full bg-[#6d1ed1] hover:bg-[#5a19ad] text-white"
+              size="lg"
+              @click="handleZelleCheckout"
+              data-testid="button-checkout"
+            >
+              PAY WITH ZELLE ($ {{ total.toFixed(2) }})
             </Button>
           </div>
         </template>
@@ -134,7 +139,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { useShopStore } from '@/stores/shop'
 import MinusSVG from './svgs/MinusSVG.vue'
 import TrashTwo from './svgs/TrashTwo.vue'
@@ -150,12 +154,31 @@ import PlusSVG from './svgs/PlusSVG.vue'
 import { getResponsiveImage } from '@/utils'
 
 const shop = useShopStore()
-const router = useRouter()
 
 const tax = computed(() => shop.cartTotal * 0.08)
 const total = computed(() => shop.cartTotal + tax.value)
 
-const handleCheckout = () => {
-  router.push('/checkout')
+const handleZelleCheckout = () => {
+  // 1. Generate the item list for the note
+  const itemSummary = shop.cartItemsWithDetails
+    .map((item) => `${item.quantity}x ${item.product?.name}${item.size ? ` (${item.size})` : ''}`)
+    .join(', ')
+
+  const zelleEmail = 'your-email@example.com' // CHANGE THIS TO YOUR ZELLE EMAIL
+  const finalAmount = total.value.toFixed(2)
+  const memoText = `Order: ${itemSummary}`.substring(0, 100) // Zelle memos are often character-limited
+
+  // 2. Create a prompt for the user
+  const instructions = `Total: $${finalAmount}\nNote: ${memoText}\n\nWe are opening Zelle. Please paste the info above into the note needed.`
+
+  alert(instructions)
+
+  // 3. Optional: Copy memo to clipboard automatically
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(memoText)
+  }
+
+  // 4. Redirect to Zelle's "Get Started" page (or your bank's specific URL)
+  window.location.href = 'https://www.zellepay.com/get-started'
 }
 </script>

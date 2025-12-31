@@ -1,6 +1,6 @@
 <template>
   <NavBar :visibleElements="visibleElements" :elementRefs="elementRefs" />
-  <div id="app" class="text-gray-800 bg-black">
+  <div id="app" class="text-gray-800 bg-gray-950">
     <TitleComp :scroll="scroll" />
 
     <main class="rounded-lg shadow-xl">

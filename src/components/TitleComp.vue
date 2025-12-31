@@ -3,7 +3,11 @@
     class="relative text-white h-[120rem] lg:h-[150rem] xl:h-[130rem]"
     :class="{ 'scale-0': scroll > 1800 }"
   >
-    <div class="fixed text-[64px] top-0" ref="title" :style="styles">
+    <div
+      class="fixed text-[64px] top-0 h-[100dvh] w-screen overflow-hidden"
+      ref="title"
+      :style="styles"
+    >
       <h3
         class="w-screen font-black metallic-copper text-center py-5 fixed text-[calc(max(64px,25vw)/4)] md:text-[calc(max(192px,20vw)/4)] lg:text-[calc(max(205px,15vw)/4)] pointer-events-none"
         ref="title"
@@ -20,15 +24,13 @@
         </p>
       </h3>
       <video
-        width="320"
-        height="240"
         controls
         autoplay
+        muted
         playsinline
-        class="relative h-screen w-screen object-cover -z-2 object-center"
+        class="relative h-[100svh] w-screen object-cover -z-2 object-center pb-[env(safe-area-inset-bottom)]"
       >
         <source src="/RiseStudios_v2.mov" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
     </div>
   </header>

@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getResponsiveImage = (url: string, mult: number = 1) => {
-  if (import.meta.env.VITE_DEV) return url
+  // if (import.meta.env.VITE_DEV) return url
   const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1200
   let width = 1280 // Default for XL/Desktop
 
@@ -18,17 +18,16 @@ export const getResponsiveImage = (url: string, mult: number = 1) => {
 
   const dpr = window.devicePixelRatio || 1
 
-  const finalWidth = Math.min(Math.round(width * dpr), 3840) * mult
+  const finalWidth = Math.round(Math.min(Math.round(width * dpr), 3840) * mult)
 
   const params = new URLSearchParams({
     w: finalWidth.toString(),
     q: dpr > 1 ? '65' : '80',
     fm: 'webp',
-    fit: 'contain',
     url: url,
   })
 
-  return `/.netlify/images?${params.toString()}`
+  return `https://risestudiosbk.com/.netlify/images?${params.toString()}`
 }
 
 import { useToast, TYPE, POSITION } from 'vue-toastification'

@@ -404,3 +404,26 @@ const nextImage = () => {
   selectedImage.value = (selectedImage.value + 1) % images.value.length
 }
 </script>
+<style scoped>
+img {
+  image-orientation: from-image; /* Standard way to respect EXIF data */
+  /* Or, if the image is being squeezed: */
+  object-fit: cover;
+}
+.image-container {
+  width: 100%;
+  height: 400px; /* Or whatever your hero height is */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  /* Choose one of these: */
+  object-fit: cover; /* Fills the area (crops edges, no white space) */
+  object-fit: contain; /* Shows whole image (adds letterboxing/white space) */
+}
+</style>
