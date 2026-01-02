@@ -245,9 +245,15 @@
       v-if="showImageModal"
       class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
     >
+      <div v-if="modalImageLoading" class="absolute inset-0 flex items-center justify-center">
+        <div
+          class="w-12 h-12 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"
+        ></div>
+      </div>
+
       <button
         @click="showImageModal = false"
-        class="absolute top-6 right-6 text-gray-400 hover:text-white"
+        class="absolute top-6 right-6 text-gray-400 hover:text-white z-10"
       >
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -258,9 +264,10 @@
           />
         </svg>
       </button>
+
       <button
         @click="previousImage"
-        class="absolute left-6 p-3 bg-gray-900/50 rounded-full text-white hover:bg-gray-800"
+        class="absolute left-6 p-3 bg-gray-900/50 rounded-full text-white hover:bg-gray-800 z-10"
       >
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -271,13 +278,20 @@
           />
         </svg>
       </button>
+
       <img
+        :key="selectedImage"
         :src="getResponsiveImage(images[selectedImage])"
-        class="max-h-[85vh] max-w-full rounded shadow-2xl object-contain"
+        @load="handleImageLoad"
+        :class="[
+          'max-h-[85vh] max-w-full rounded shadow-2xl object-contain transition-opacity duration-300',
+          modalImageLoading ? 'opacity-0' : 'opacity-100',
+        ]"
       />
+
       <button
         @click="nextImage"
-        class="absolute right-6 p-3 bg-gray-900/50 rounded-full text-white hover:bg-gray-800"
+        class="absolute right-6 p-3 bg-gray-900/50 rounded-full text-white hover:bg-gray-800 z-10"
       >
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -298,27 +312,28 @@ interface Amenity {
 }
 
 const images = ref<string[]>([
-  '/rental/IMG_5664.JPG',
-  '/rental/IMG_5665.JPG',
-  '/rental/IMG_5666.JPG',
-  '/rental/IMG_5667.JPG',
-  '/rental/IMG_5668.JPG',
-  '/rental/IMG_5669.JPG',
-  '/rental/IMG_5670.JPG',
-  '/rental/IMG_5671.JPG',
-  '/rental/IMG_5672.JPG',
-  '/rental/IMG_5673.JPG',
-  '/rental/IMG_5674.JPG',
-  '/rental/IMG_5675.JPG',
-  '/rental/IMG_5676.JPG',
-  '/rental/IMG_5677.JPG',
-  '/rental/IMG_5678.JPG',
-  '/rental/IMG_5679.JPG',
-  '/rental/IMG_5680.JPG',
+  '/rental/img1.jpg',
+  '/rental/img2.jpg',
+  '/rental/img3.jpg',
+  '/rental/img4.jpg',
+  '/rental/img5.jpg',
+  '/rental/img6.jpg',
+  '/rental/img7.jpg',
+  '/rental/img8.jpg',
+  '/rental/img9.jpg',
+  '/rental/img10.jpg',
+  '/rental/img11.jpg',
+  '/rental/img12.jpg',
+  '/rental/img13.jpg',
+  '/rental/img14.jpg',
+  '/rental/img15.jpg',
+  '/rental/img16.jpg',
+  '/rental/img17.jpg',
 ])
 
-const selectedImage = ref<number>(0)
-const showImageModal = ref<boolean>(false)
+const selectedImage = ref(0)
+const showImageModal = ref(false)
+const modalImageLoading = ref(true)
 
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const timeSlots = ref<string[]>([])
@@ -391,16 +406,23 @@ const amenities = ref<Amenity[]>([
     label: 'Elevator Access',
   },
 ])
+const handleImageLoad = () => {
+  modalImageLoading.value = false
+}
+
 const openImageModal = (index: number) => {
   selectedImage.value = index
   showImageModal.value = true
+  modalImageLoading.value = true // Reset loading state when opening
 }
 
 const previousImage = () => {
+  modalImageLoading.value = true // Reset loading state
   selectedImage.value = (selectedImage.value - 1 + images.value.length) % images.value.length
 }
 
 const nextImage = () => {
+  modalImageLoading.value = true // Reset loading state
   selectedImage.value = (selectedImage.value + 1) % images.value.length
 }
 </script>
