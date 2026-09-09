@@ -31,7 +31,7 @@
             playsinline
             class="relative h-[100svh] w-screen object-cover z-0 object-center pb-[env(safe-area-inset-bottom)]"
           >
-        <source src="/RiseStudios_v2.mp4" type="video/mp4" />
+        <source src="/risestudios.mp4" type="video/mp4" />
       </video>
     </div>
   </header>
