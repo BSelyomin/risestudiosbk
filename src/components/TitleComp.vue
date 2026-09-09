@@ -24,12 +24,14 @@
         </p>
       </h3>
       <video
-        controls
-        autoplay
-        playsinline
-        class="relative h-[100svh] w-screen object-cover -z-2 object-center pb-[env(safe-area-inset-bottom)]"
-      >
-        <source src="/RiseStudios_v2.mov" type="video/mp4" />
+            controls
+            autoplay
+            loop
+            muted
+            playsinline
+            class="relative h-[100svh] w-screen object-cover z-0 object-center pb-[env(safe-area-inset-bottom)]"
+          >
+        <source src="/RiseStudios_v2.mp4" type="video/mp4" />
       </video>
     </div>
   </header>
